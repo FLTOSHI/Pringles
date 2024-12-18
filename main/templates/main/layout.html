@@ -10,14 +10,22 @@
 </head>
 <body>
 <aside>
-    <img src="{% static 'main/img/image.png' %}" alt="смешно!">
-    <span class="logo">Memes</span>
-    <h3>Мем.com</h3>
+    <div class="header">
+        <img src="{% static 'main/img/image.png' %}" alt="смешно!">
+        <div>
+            <span class="logo">Memes</span>
+            <h3>Мем.com</h3>
+        </div>
+    </div>
     <ul>
         <li><a href="{% url 'home' %}">Главная</a></li>
         <li><a href="{% url 'about' %}">О нас</a></li>
-        <li><a href="{% url 'news_home' %}">Новости</a></li>
-        <li><a href="{% url 'create' %}"><button class="btn btn-info"><i class="fas fa-plus-circle"></i>Добавить новость</button></a></li>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Выход</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}">Вход</a></li>
+            <li><a href="{% url 'register' %}">Регистрация</a></li>
+        {% endif %}
     </ul>
 </aside>
 <main>
